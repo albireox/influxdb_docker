@@ -13,7 +13,7 @@ services:
     environment:
       GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
   influxdb:
-    image: quay.io/influxdb/influxdb:2.0.4
+    image: quay.io/influxdb/influxdb:v2.0.4
     container_name: influxdb
     restart: always
     ports:
