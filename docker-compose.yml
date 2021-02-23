@@ -5,7 +5,7 @@ services:
     container_name: grafana
     restart: always
     ports:
-      - 3333:3333
+      - 3333:3000
     networks:
       - monitoring
     volumes:
@@ -17,7 +17,7 @@ services:
     container_name: influxdb
     restart: always
     ports:
-      - 9999:9999
+      - 9999:8086
     networks:
       - monitoring
     volumes:
