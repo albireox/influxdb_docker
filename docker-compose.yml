@@ -7,7 +7,8 @@ services:
     ports:
       - 3333:3000
     networks:
-      - monitoring
+      monitoring:
+        ipv4_address: 172.23.0.3
     volumes:
       - grafana-volume:/var/lib/grafana
     environment:
@@ -19,11 +20,17 @@ services:
     ports:
       - 9999:8086
     networks:
-      - monitoring
+      monitoring:
+        ipv4_address: 172.23.0.2
     volumes:
       - influxdb-volume:/root/.influxdbv2
 networks:
   monitoring:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet:  172.23.0.1/16
 volumes:
   grafana-volume:
     external: true
