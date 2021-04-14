@@ -5,7 +5,6 @@ To run, make sure that Docker Engine and Docker Compose are installed. Before ru
 ```console
 docker volume create --name=influxdb-volume
 docker volume create --name=grafana-volume
-docker network create monitoring
 ```
 
 To run the services
