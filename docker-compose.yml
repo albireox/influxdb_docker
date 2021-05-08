@@ -33,6 +33,7 @@ services:
 
   renderer:
     image: grafana/grafana-image-renderer:latest
+    container_name: grafana_renderer
     ports:
       - 8081
     networks:
