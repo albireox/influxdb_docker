@@ -5,14 +5,20 @@ services:
     container_name: grafana
     restart: always
     ports:
-      - 3333:3000
+      - 80:3000
     networks:
       monitoring:
         ipv4_address: 172.23.0.3
     volumes:
+      - ./config/grafana.ini:/etc/grafana/grafana.ini
       - grafana-volume:/var/lib/grafana
     environment:
+      GF_PATHS_CONFIG: /etc/grafana/grafana.ini
       GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
+      GF_RENDERING_SERVER_URL: http://renderer:8081/render
+      GF_RENDERING_CALLBACK_URL: http://grafana:3000/
+      GF_LOG_FILTERS: rendering:debug
+
   influxdb:
     image: quay.io/influxdb/influxdb:v2.0.4
     container_name: influxdb
@@ -24,13 +30,26 @@ services:
         ipv4_address: 172.23.0.2
     volumes:
       - influxdb-volume:/root/.influxdbv2
+
+  renderer:
+    image: grafana/grafana-image-renderer:latest
+    container_name: grafana_renderer
+    ports:
+      - 8081
+    networks:
+      monitoring:
+        ipv4_address: 172.23.0.4
+    environment:
+      ENABLE_METRICS: 'true'
+
 networks:
   monitoring:
     driver: bridge
     ipam:
       driver: default
       config:
-        - subnet:  172.23.0.1/16
+        - subnet: 172.23.0.1/16
+
 volumes:
   grafana-volume:
     external: true
