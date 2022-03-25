@@ -11,7 +11,7 @@ services:
         ipv4_address: 172.23.0.3
     volumes:
       - ./config/grafana.ini:/etc/grafana/grafana.ini
-      - grafana-volume:/var/lib/grafana
+      - /data/docker_volumes/grafana:/var/lib/grafana
     environment:
       GF_PATHS_CONFIG: /etc/grafana/grafana.ini
       GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
@@ -29,7 +29,7 @@ services:
       monitoring:
         ipv4_address: 172.23.0.2
     volumes:
-      - influxdb-volume:/root/.influxdbv2
+      - /data/docker_volumes/influxdb:/root/.influxdbv2
 
   renderer:
     image: grafana/grafana-image-renderer:latest
@@ -50,8 +50,3 @@ networks:
       config:
         - subnet: 172.23.0.1/16
 
-volumes:
-  grafana-volume:
-    external: true
-  influxdb-volume:
-    external: true
