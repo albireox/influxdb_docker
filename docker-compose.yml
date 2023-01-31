@@ -50,4 +50,3 @@ networks:
       driver: default
       config:
         - subnet: 172.23.0.1/16
-
