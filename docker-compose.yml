@@ -1,11 +1,11 @@
 version: '3.8'
 services:
   grafana:
-    image: grafana/grafana:8.2.1
+    image: grafana/grafana:8.2.6
     container_name: grafana
     restart: always
     ports:
-      - 80:3000
+      - 3333:3000
     networks:
       monitoring:
         ipv4_address: 172.23.0.3
@@ -20,7 +20,7 @@ services:
       GF_LOG_FILTERS: rendering:debug
 
   influxdb:
-    image: quay.io/influxdb/influxdb:v2.0.7
+    image: quay.io/influxdb/influxdb:v2.2.0
     container_name: influxdb
     restart: always
     ports:
