@@ -20,7 +20,7 @@ services:
       GF_LOG_FILTERS: rendering:debug
 
   influxdb:
-    image: quay.io/influxdb/influxdb:v2.2.0
+    image: influxdb:2.6.1
     container_name: influxdb
     restart: always
     ports:
