@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   grafana:
-    image: grafana/grafana:9.4.2
+    image: grafana/grafana:9.5.1
     container_name: grafana
     restart: always
     ports:
@@ -20,7 +20,7 @@ services:
       GF_LOG_FILTERS: rendering:debug
 
   influxdb:
-    image: influxdb:2.6.1
+    image: influxdb:2.7.0
     container_name: influxdb
     restart: always
     ports:
@@ -29,7 +29,7 @@ services:
       monitoring:
         ipv4_address: 172.23.0.2
     volumes:
-      - influxdb-volume:/root/.influxdbv2
+      - /data/docker_volumes/influxdb:/var/lib/influxdb2
 
   renderer:
     image: grafana/grafana-image-renderer:latest
