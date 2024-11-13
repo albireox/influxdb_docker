@@ -1,9 +1,10 @@
 version: '3.8'
 services:
   grafana:
-    image: grafana/grafana:9.5.1
+    image: grafana/grafana:11.3.0
     container_name: grafana
     restart: always
+    user: "999:0"
     ports:
       - 3333:3000
     networks:
@@ -11,7 +12,7 @@ services:
         ipv4_address: 172.23.0.3
     volumes:
       - ./config/grafana.ini:/etc/grafana/grafana.ini
-      - grafana-volume:/var/lib/grafana
+      - /data/docker_volumes/grafana:/var/lib/grafana
     environment:
       GF_PATHS_CONFIG: /etc/grafana/grafana.ini
       GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
@@ -20,7 +21,7 @@ services:
       GF_LOG_FILTERS: rendering:debug
 
   influxdb:
-    image: influxdb:2.7.0
+    image: influxdb:2.7.10
     container_name: influxdb
     restart: always
     ports:
